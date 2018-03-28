@@ -10,6 +10,7 @@ import offerings.ICourseOffering;
 import offerings.OfferingFactory;
 import registrar.ModelRegister;
 import systemUsers.StudentModel;
+import ProcessServer.*;
 
 public class TestStudentModelFactory_1 {
 
@@ -49,6 +50,9 @@ public class TestStudentModelFactory_1 {
 				System.out.println(student.getName() + "\t\t -> " + course2.getCourseName());
 			}
 		}
+		Login log = new Login();
+		log.perform();
+
 		
 		
 	}
