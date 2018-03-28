@@ -1,4 +1,4 @@
-package ProcessServer;
+package processServer;
 
 
 import authenticatedUsers.LoggedInAuthenticatedUser;

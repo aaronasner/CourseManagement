@@ -11,7 +11,7 @@ import offerings.ICourseOffering;
 import offerings.OfferingFactory;
 import registrar.ModelRegister;
 import systemUsers.StudentModel;
-import ProcessServer.*;
+import processServer.*;
 
 public class TestStudentModelFactory_1 {
 

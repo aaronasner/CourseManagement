@@ -1,4 +1,4 @@
-package ProcessServer;
+package processServer;
 
 import authenticatedUsers.LoggedInAuthenticatedUser;
 import java.util.Scanner;
