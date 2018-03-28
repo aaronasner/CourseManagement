@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Map;
+import java.util.Scanner;
 
 import authenticatedUsers.LoggedInAuthenticatedUser;
 import offerings.CourseOffering;
@@ -12,6 +14,7 @@ import offerings.OfferingFactory;
 import registrar.ModelRegister;
 import systemUsers.StudentModel;
 import processServer.*;
+import systemUsers.SystemUserModel;
 
 public class TestStudentModelFactory_1 {
 
@@ -52,16 +55,81 @@ public class TestStudentModelFactory_1 {
 			}
 		}
 
-		Login log = new Login();
-        LoggedInAuthenticatedUser user = log.perform();
-		while(user == null){
-            System.out.println("User does not exist try again");
-            user = log.perform();
+        boolean state = true;
+        while(true) {
+
+            Scanner reader = new Scanner(System.in);
+            Login login = new Login();
+            System.out.println("\n-------Login-------\n");
+            LoggedInAuthenticatedUser user = login.perform();
+            while (user == null) {
+                System.out.println("User does not exist, please try again");
+                user = login.perform();
+            }
+
+
+            String userType = user.getAuthenticationToken().getUserType();
+
+
+            if(userType.equals("Admin")){
+                System.out.println("Choose an Operation:\n" +
+                        "(1) Start\n" +
+                        "(2) Stop\n" +
+                        "(3) Read Course file\n");
+                int adminChoice = reader.nextInt();
+                switch(adminChoice){
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+
+                }
+            }
+
+            operationLoop:
+            while (state) { //loop which runs when state is "on" and provides students and instructors with their operations
+                switch (userType) {
+                    case "Student":
+                        System.out.println("Available Operations:\n" +
+                                "(1) Enroll in Course\n" +
+                                "(2) Change Notification Preference\n" +
+                                "(3) Print Course Record\n" +
+                                "(4) Select Notification Status\n" +
+                                "(5) Logout");
+                        int studentChoice = reader.nextInt();
+                        switch (studentChoice) {
+                            case 1:
+                                System.out.println("1");
+                                break;
+                            case 2:
+                                System.out.println("2");
+                                break;
+                            case 3:
+                                System.out.println("3");
+                                break;
+                            case 4:
+                                System.out.println("4");
+                                break;
+                            case 5:
+                                Logout logout = new Logout();
+                                logout.perform(user);
+                                System.out.println("Successfully logged out.\n");
+                                break operationLoop; //breaks operation loop and asks for another log in
+                        }
+                        break;
+
+                    case "Instructor":
+                        System.out.println("instructor");
+                        break;
+
+                }
+            }
         }
 
 
 
-		
 		
 	}
 }

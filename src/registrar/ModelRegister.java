@@ -55,4 +55,8 @@ public class ModelRegister {
 		return courses;
 	}
 
+	public Map<String, SystemUserModel> getUsers(){
+		return modelRegister;
+	}
+
 }
