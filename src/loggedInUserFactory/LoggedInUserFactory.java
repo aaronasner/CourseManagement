@@ -5,6 +5,8 @@ import authenticatedUsers.LoggedInAuthenticatedUser;
 import authenticatedUsers.LoggedInInstructor;
 import authenticatedUsers.LoggedInStudent;
 import authenticationServer.AuthenticationToken;
+import registrar.ModelRegister;
+import systemUsers.SystemUserModel;
 
 public class LoggedInUserFactory {
 
@@ -26,17 +28,38 @@ public class LoggedInUserFactory {
 	}
 	
 	public LoggedInStudent createLoggedInStudent(AuthenticationToken authenticationToken){
-//		TODO add object creation logic
-		return new LoggedInStudent();
+		String ID = authenticationToken.getTokenID().toString();
+		ModelRegister reg = ModelRegister.getInstance();
+		SystemUserModel user = reg.getRegisteredUser(ID);
+		LoggedInStudent student = new LoggedInStudent();
+		student.setAuthenticationToken(authenticationToken);
+		student.setID(user.getID());
+		student.setName(user.getName());
+		student.setSurname(user.getSurname());
+		return student;
 	}
 	
 	public LoggedInAdmin createLoggedInAdmin(AuthenticationToken authenticationToken){
-//		TODO add object creation logic
-		return new LoggedInAdmin();
+		String ID = authenticationToken.getTokenID().toString();
+		ModelRegister reg = ModelRegister.getInstance();
+		SystemUserModel user = reg.getRegisteredUser(ID);
+		LoggedInAdmin admin = new LoggedInAdmin();
+		admin.setAuthenticationToken(authenticationToken);
+		admin.setID(user.getID());
+		admin.setName(user.getName());
+		admin.setSurname(user.getSurname());
+		return admin;
 	}
 	
 	public LoggedInInstructor createLoggedInInstructor(AuthenticationToken authenticationToken){
-//		TODO add object creation logic 
-		return new LoggedInInstructor();
+		String ID = authenticationToken.getTokenID().toString();
+		ModelRegister reg = ModelRegister.getInstance();
+		SystemUserModel user = reg.getRegisteredUser(ID);
+		LoggedInInstructor instructor = new LoggedInInstructor();
+		instructor.setAuthenticationToken(authenticationToken);
+		instructor.setID(user.getID());
+		instructor.setName(user.getName());
+		instructor.setSurname(user.getSurname());
+		return instructor;
 	}
 }

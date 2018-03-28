@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import authenticatedUsers.LoggedInAuthenticatedUser;
 import offerings.CourseOffering;
 import offerings.ICourseOffering;
 import offerings.OfferingFactory;
@@ -50,8 +51,15 @@ public class TestStudentModelFactory_1 {
 				System.out.println(student.getName() + "\t\t -> " + course2.getCourseName());
 			}
 		}
+
 		Login log = new Login();
-		log.perform();
+        LoggedInAuthenticatedUser user = log.perform();
+		while(user == null){
+            System.out.println("User does not exist try again");
+            user = log.perform();
+        }
+
+
 
 		
 		

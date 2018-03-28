@@ -5,9 +5,10 @@ import java.util.Scanner;
 import registrar.ModelRegister;
 import authenticationServer.AuthenticationToken;
 import systemUsers.SystemUserModel;
+import loggedInUserFactory.LoggedInUserFactory;
 
 
-public class Login implements IOperation {
+public class Login extends IOperation {
 
     String STUDENT = "systemUsers.StudentModel";
     String ADMIN = "systemUsers.AdminModel";
@@ -15,6 +16,7 @@ public class Login implements IOperation {
     static int i = 0;
 
     public LoggedInAuthenticatedUser perform(){
+        LoggedInAuthenticatedUser loggedUser = null;
         Scanner reader = new Scanner(System.in);
         System.out.println("Enter First Name:");
         String name = reader.nextLine();
@@ -27,21 +29,22 @@ public class Login implements IOperation {
             String type = user.getClass().getName();
             String userType = "";
             if(type.equals(STUDENT)){
-                userType = "student";
+                userType = "Student";
             }
             else if(type.equals(ADMIN)){
-                userType = "admin";
+                userType = "Admin";
             }
             else if(type.equals(INSTRUCTOR)){
-                userType = "instructor";
+                userType = "Instructor";
             }
             AuthenticationToken authToken = new AuthenticationToken();
             authToken.setTokenID(Integer.parseInt(ID));
             authToken.setSessionID(i++);
             authToken.setUserType(userType);
-
+            LoggedInUserFactory lu = new LoggedInUserFactory();
+            loggedUser = lu.createAuthenticatedUser(authToken);
         }
-        return null;
+        return loggedUser;
     }
 
     private boolean checkUserValid(String ID){
