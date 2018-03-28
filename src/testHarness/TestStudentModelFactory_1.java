@@ -56,15 +56,29 @@ public class TestStudentModelFactory_1 {
 		}
 
         boolean state = true;
+		program:
         while(true) {
-
+            LoggedInAuthenticatedUser user = null;
             Scanner reader = new Scanner(System.in);
             Login login = new Login();
-            System.out.println("\n-------Login-------\n");
-            LoggedInAuthenticatedUser user = login.perform();
-            while (user == null) {
-                System.out.println("User does not exist, please try again");
+            System.out.println("\nPress q to quit program or enter to continue.");
+            String cont = reader.nextLine();
+            if(cont.equals("q")){
+                System.exit(69);
+            }
+            else {
+                System.out.println("\n-------Login-------\n");
                 user = login.perform();
+                while (user == null) {
+                    System.out.println("\nUser does not exist, please try again.");
+                    System.out.println("Press q to quit program or enter to continue.");
+                    cont = reader.nextLine();
+                    System.out.println("\n-------Login-------\n");
+                    if(cont.equals("q")){
+                        System.exit(69);
+                    }
+                    user = login.perform();
+                }
             }
 
 
@@ -115,7 +129,7 @@ public class TestStudentModelFactory_1 {
                             case 5:
                                 Logout logout = new Logout();
                                 logout.perform(user);
-                                System.out.println("Successfully logged out.\n");
+                                System.out.println("Successfully logged out.");
                                 break operationLoop; //breaks operation loop and asks for another log in
                         }
                         break;
