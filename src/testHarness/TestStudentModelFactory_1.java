@@ -113,8 +113,7 @@ public class TestStudentModelFactory_1 {
                 System.out.println("Choose an Operation:\n" +
                         "(1) Start\n" +
                         "(2) Stop\n" +
-                        "(3) Read Course file\n" +
-                        "(4) Logout");
+                        "(3) Logout");
                 int adminChoice = reader.nextInt();
                 switch(adminChoice){
                     case 1:
@@ -126,8 +125,6 @@ public class TestStudentModelFactory_1 {
                         stop.perform(user);
                         break;
                     case 3:
-                        break;
-                    case 4:
                         Logout logout = new Logout();
                         logout.perform(user);
                         System.out.println("Successfully logged out.");
