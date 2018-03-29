@@ -8,8 +8,7 @@ import java.util.HashMap;
 import customDatatypes.EvaluationTypes;
 import customDatatypes.Weights;
 import registrar.ModelRegister;
-import systemUserModelFactories.InstructorModelFactory;
-import systemUserModelFactories.StudentModelFactory;
+import systemUserModelFactories.*;
 import systemUserModelFactories.SystemUserModelFactory;
 import systemUsers.InstructorModel;
 import systemUsers.StudentModel;
@@ -52,6 +51,7 @@ public class OfferingFactory {
 //				the actual create instance method call
 				course.getStudentsAllowedToEnroll().add((StudentModel)theFactory.createSystemUserModel(br, course));
 			}
+
 //			consuming EVALUATION ENTITIES tag (you'll notice there are other standalone br.readLine() calls 
 //			that consume and generally advance the input to the desirable line
 			line = br.readLine();

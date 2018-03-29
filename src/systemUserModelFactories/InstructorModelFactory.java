@@ -11,7 +11,6 @@ import systemUsers.InstructorModel;
 public class InstructorModelFactory implements SystemUserModelFactory {
 
 	public InstructorModel createSystemUserModel(BufferedReader br, ICourseOffering course) {
-		// TODO Auto-generated method stub
 		InstructorModel newInstructorModel = new InstructorModel();
 		try{
 		String line = br.readLine();
