@@ -56,57 +56,72 @@ public class TestStudentModelFactory_1 {
 		}
 
         boolean state = true;
-		program:
         while(true) {
             LoggedInAuthenticatedUser user = null;
             Scanner reader = new Scanner(System.in);
             Login login = new Login();
+            //asks whether user would like to quit or continue the program
             System.out.println("\nPress q to quit program or enter to continue.");
             String cont = reader.nextLine();
             if(cont.equals("q")){
                 System.exit(69);
             }
             else {
+            //if user would like to continue will perform login operation
                 System.out.println("\n-------Login-------\n");
                 user = login.perform();
+                //while loop to rerun login operation if user input was invalid
                 while (user == null) {
                     System.out.println("\nUser does not exist, please try again.");
                     System.out.println("Press q to quit program or enter to continue.");
                     cont = reader.nextLine();
                     System.out.println("\n-------Login-------\n");
+                    //exits if user entered "q"
                     if(cont.equals("q")){
                         System.exit(69);
                     }
+                    //else performs login
                     user = login.perform();
                 }
             }
 
-
+            //gets logged in user type for use of providing appropriate operations
             String userType = user.getAuthenticationToken().getUserType();
 
+            //if user is admin, will provide the admin with operations
+            adminLoop:
+            while(true){
+                if(userType.equals("Admin")){
+                    //asks for operation user wishes to perform
+                    System.out.println("Choose an Operation:\n" +
+                            "(1) Start\n" +
+                            "(2) Stop\n" +
+                            "(3) Read Course file\n" +
+                            "(4) Logout\n");
+                    int adminChoice = reader.nextInt();
+                    switch(adminChoice){
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            Logout logout = new Logout();
+                            logout.perform(user);
+                            System.out.println("Successfully logged out.");
+                            break adminLoop;
 
-            if(userType.equals("Admin")){
-                System.out.println("Choose an Operation:\n" +
-                        "(1) Start\n" +
-                        "(2) Stop\n" +
-                        "(3) Read Course file\n");
-                int adminChoice = reader.nextInt();
-                switch(adminChoice){
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-
+                    }
                 }
             }
+
 
             operationLoop:
             while (state) { //loop which runs when state is "on" and provides students and instructors with their operations
                 switch (userType) {
                     case "Student":
-                        System.out.println("Available Operations:\n" +
+                        System.out.println("Choose an Operation:\n" +
                                 "(1) Enroll in Course\n" +
                                 "(2) Change Notification Preference\n" +
                                 "(3) Print Course Record\n" +
